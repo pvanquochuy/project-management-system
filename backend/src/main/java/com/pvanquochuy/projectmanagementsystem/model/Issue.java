@@ -21,7 +21,7 @@ public class Issue {
     private String projectID;
     private String priority;
     private LocalDate dueDate;
-    private List<String> tags = new ArrayList<String>();
+    private List<String> tags = new ArrayList<>();
 
     @ManyToOne
     private User assignee;
