@@ -1,5 +1,6 @@
 package com.pvanquochuy.projectmanagementsystem.repository;
 
+import com.pvanquochuy.projectmanagementsystem.model.Issue;
 import com.pvanquochuy.projectmanagementsystem.model.Project;
 import com.pvanquochuy.projectmanagementsystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,4 +25,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     //  trả về danh sách các dự án mà trong nhóm (team) của dự án đó có một người dùng cụ thể (user)
     //  hoặc chủ sở hữu của dự án là một người dùng cụ thể khác (owner).
     List<Project> findByTeamContainingOrOwner(User user, User owner);
+
+
 }

@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService{
         Chat projectChat = chatService.createChat(chat);
         saveProject.setChat(projectChat);
 
-        return null;
+        return saveProject;
     }
 
     @Override
@@ -63,6 +63,7 @@ public class ProjectServiceImpl implements ProjectService{
     @Override
     public Project getProjectById(Long projectId) throws Exception {
         Optional<Project> optionalProject = projectRepository.findById(projectId);
+
         if(optionalProject.isEmpty()){
             throw new Exception("Project not found: " );
         }

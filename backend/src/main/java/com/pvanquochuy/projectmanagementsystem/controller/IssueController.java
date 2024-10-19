@@ -47,7 +47,7 @@ public class IssueController {
         issueDTO.setId(createIssue.getId());
         issueDTO.setPriority(createIssue.getPriority());
         issueDTO.setProject(createIssue.getProject());
-        issueDTO.setProjectId(createIssue.getProjectId());
+        issueDTO.setProjectId(createIssue.getProjectID());
         issueDTO.setStatus(createIssue.getStatus());
         issueDTO.setTitle(createIssue.getTitle());
         issueDTO.setTags(createIssue.getTags());

@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+// 5:54
 
 @RestController
 @RequestMapping("/api/projects")
@@ -53,7 +54,6 @@ public class ProjectController {
 
     @PostMapping
     public ResponseEntity<Project> createProject(
-            @PathVariable Long projectId,
             @RequestHeader("Authorization") String jwt,
             @RequestBody Project project
     ) throws Exception {
@@ -88,7 +88,7 @@ public class ProjectController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/search")
     public ResponseEntity<List<Project>> searchProjects(
             @RequestParam(required = false) String keyword,
             @RequestHeader("Authorization") String jwt
@@ -110,7 +110,7 @@ public class ProjectController {
         return new ResponseEntity<>(chat, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/invite")
     public ResponseEntity<MessageResponse> inviteProject(
             @RequestBody InviteRequest req,
             @RequestHeader("Authorization") String jwt,
@@ -123,7 +123,7 @@ public class ProjectController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @PostMapping("/invite")
+    @GetMapping("/invite")
     public ResponseEntity<Invitation> acceptInviteProject(
             @RequestParam String token,
             @RequestHeader("Authorization") String jwt,

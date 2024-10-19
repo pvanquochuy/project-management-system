@@ -25,7 +25,7 @@ public class Chat {
     private Project project;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "Chat", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
     @ManyToMany
