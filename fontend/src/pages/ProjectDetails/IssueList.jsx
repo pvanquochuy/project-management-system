@@ -15,6 +15,7 @@ import {
 import IssueCard from "./IssueCard";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
+import CreateIssueForm from "./CreateIssueForm";
 
 const IssueList = ({ title, status }) => {
   return (
@@ -26,7 +27,9 @@ const IssueList = ({ title, status }) => {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <IssueCard />
+              {[1, 1, 1].map((item) => (
+                <IssueCard key={item} />
+              ))}
             </div>
           </CardContent>
           <CardFooter>
@@ -46,6 +49,7 @@ const IssueList = ({ title, status }) => {
           <DialogHeader>
             <DialogTitle>Create New Issue</DialogTitle>
           </DialogHeader>
+          <CreateIssueForm />
         </DialogContent>
       </Dialog>
     </div>

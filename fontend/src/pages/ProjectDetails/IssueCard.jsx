@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DotsVerticalIcon, PersonIcon } from "@radix-ui/react-icons";
+import UserList from "./UserList";
 
 const IssueCard = () => {
   return (
@@ -47,6 +48,9 @@ const IssueCard = () => {
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <UserList />
+            </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </CardContent>
