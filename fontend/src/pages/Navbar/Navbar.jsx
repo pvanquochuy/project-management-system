@@ -14,12 +14,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="border-b py-4 px-5 items-center flex justify-between">
       <div className="flex items-center gap-3">
-        <p className="cursor-pointer">Project Management</p>
+        <p onClick={() => navigate("/")} className="cursor-pointer">
+          Project Management
+        </p>
         <Dialog>
           <DialogTrigger>
             <Button variant="ghost">New Project</Button>

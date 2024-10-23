@@ -13,6 +13,8 @@ const ChatBox = () => {
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   };
+
+  // 9: 34
   return (
     <div className="sticky ">
       <div className="border rounded-lg">

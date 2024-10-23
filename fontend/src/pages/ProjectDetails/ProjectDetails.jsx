@@ -6,6 +6,7 @@ import {
   DialogClose,
   DialogContent,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { PlusIcon } from "@radix-ui/react-icons";
@@ -63,7 +64,9 @@ const ProjectDetails = () => {
                     </DialogClose>
                   </DialogTrigger>
                   <DialogContent>
-                    <DialogHeader>Invite User</DialogHeader>
+                    <DialogHeader>
+                      <DialogTitle>Invite User</DialogTitle>
+                    </DialogHeader>
                     <InviteUserForm />
                   </DialogContent>
                 </Dialog>
