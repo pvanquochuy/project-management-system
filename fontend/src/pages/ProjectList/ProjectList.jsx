@@ -8,9 +8,9 @@ import {
 } from "@radix-ui/react-icons";
 import { Label } from "@radix-ui/react-label";
 import { RadioGroup } from "@radix-ui/react-radio-group";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import React, { useState } from "react";
 import ProjectCard from "../Project/ProjectCard";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const tags = [
   "all",
@@ -46,7 +46,7 @@ const ProjectList = () => {
             </div>
 
             <CardContent className="mt-5">
-              <ScrollArea className="space-y-7 h-[70vh] overflow-y-auto ">
+              <ScrollArea className="space-y-7 h-[70vh] pr-2">
                 <div>
                   <h1 className="pb-3 text-gray-400 border-b">Category</h1>
                   <div className="pt-5">
