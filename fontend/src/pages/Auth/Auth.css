@@ -58,7 +58,7 @@
   filter: drop-shadow(0 15px 50px #000);
   border-radius: 20px;
   animation: rotating 4s linear infinite;
-  /* animation-delay: -1s; */
+  animation-delay: -1s;
 }
 .box::after {
   content: "";
