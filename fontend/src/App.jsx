@@ -5,20 +5,27 @@ import Navbar from "./pages/Navbar/Navbar";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
 import IssueDetails from "./pages/IssueDetails/IssueDetails";
 import Subcription from "./pages/Subcription/Subcription";
+import Auth from "./pages/Auth/Auth";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/project/:id" element={<ProjectDetails />} />
-        <Route
-          path="/project/:projectId/issue/:issueId"
-          element={<IssueDetails />}
-        />
-        <Route path="/upgrade_plan" element={<Subcription />} />
-      </Routes>
+      {false ? (
+        <div>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/project/:id" element={<ProjectDetails />} />
+            <Route
+              path="/project/:projectId/issue/:issueId"
+              element={<IssueDetails />}
+            />
+            <Route path="/upgrade_plan" element={<Subcription />} />
+          </Routes>
+        </div>
+      ) : (
+        <Auth />
+      )}
     </>
   );
 }
