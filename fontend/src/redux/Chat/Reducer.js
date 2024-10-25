@@ -43,3 +43,5 @@ const chatReducer = (state = initialState, action) => {
       state;
   }
 };
+
+export default chatReducer;
