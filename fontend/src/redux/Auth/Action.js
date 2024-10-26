@@ -1,10 +1,10 @@
 import { API_BASE_URL } from "@/config/app";
 import {
-    GET_USER__SUCCESS,
-    GET_USER_REQUEST,
+  GET_USER_REQUEST,
   GET_USER_SUCCESS,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOGOUT,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
 } from "./ActionTypes";
@@ -40,18 +40,16 @@ export const login = (userData) => async (dispatch) => {
   }
 };
 
-export const getUser = (userData) => async (dispatch) => {
+export const getUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   try {
-    const { data } = await axios.get(`${API_BASE_URL}/auth/signin`, {
-        headers:{
-            Authorization:`Bearer ${localStorage.getItem("jwt")}`
-        }
+    const { data } = await axios.get(`${API_BASE_URL}/api/users/profile`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     });
-    if (data.jwt) {
-      localStorage.setItem("jwt", data.jwt);
-      dispatch({ type: GET_USER_SUCCESS, payload: data });
-    }
+
+    dispatch({ type: GET_USER_SUCCESS, payload: data });
 
     console.log("get user success: ", data);
   } catch (error) {
@@ -59,7 +57,7 @@ export const getUser = (userData) => async (dispatch) => {
   }
 };
 
-export const logout = () => async (dispatch){
-    dispatch({type:LOGOUT})
-    localStorage.clear()
-}
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+  localStorage.clear();
+};

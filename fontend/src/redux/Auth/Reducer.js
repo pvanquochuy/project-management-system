@@ -32,7 +32,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        user: action.payload.jwt,
+        user: action.payload,
       };
 
     case LOGOUT:
