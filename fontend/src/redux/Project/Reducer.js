@@ -72,6 +72,6 @@ export const projectReducer = (state = initialState, action) => {
       };
 
     default:
-      state;
+      return state;
   }
 };
