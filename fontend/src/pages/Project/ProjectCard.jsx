@@ -10,7 +10,7 @@ import {
 import { DotFilledIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 
-const ProjectCard = () => {
+const ProjectCard = ({ item }) => {
   const navigate = useNavigate();
 
   return (
@@ -23,10 +23,10 @@ const ProjectCard = () => {
                 onClick={() => navigate("/project/3")}
                 className="cursor-pointer font-bold text-lg"
               >
-                Create Ecommerce Project
+                {item.name}
               </h1>
               <DotFilledIcon />
-              <p className="text-sm text-gray-400">fullstack</p>
+              <p className="text-sm text-gray-400">{item.category}</p>
             </div>
             <div>
               <DropdownMenu>
@@ -42,15 +42,13 @@ const ProjectCard = () => {
               </DropdownMenu>
             </div>
           </div>
-          <p className="text-gray-500 text-sm">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          </p>
+          <p className="text-gray-500 text-sm">{item.description}</p>
         </div>
 
         <div className="flex flex-wrap gap-2 items-center">
-          {[1, 1, 1, 1].map((item) => (
+          {item.tags.map((tag) => (
             <Badge key={item} variant="outline">
-              {"frontend"}
+              {tag}
             </Badge>
           ))}
         </div>

@@ -18,9 +18,13 @@ import {
 import { useForm } from "react-hook-form";
 import { tags } from "../ProjectList/ProjectList";
 import { Cross1Icon } from "@radix-ui/react-icons";
+import { useDispatch } from "react-redux";
+import { createProject } from "@/redux/Project/Action";
 
 // 7:52
 const CreateProjectForm = () => {
+  const dispatch = useDispatch();
+
   const handleTagsChange = (newValue) => {
     const currentTags = form.getValues("tags");
 
@@ -39,6 +43,7 @@ const CreateProjectForm = () => {
     },
   });
   const onSubmit = (data) => {
+    dispatch(createProject(data));
     console.log("create project data: ", data);
   };
   return (
@@ -55,7 +60,7 @@ const CreateProjectForm = () => {
                     {...field}
                     type="text"
                     className="border w-full border-gray-700 py-5 px-5"
-                    placeholder="project descriptions..."
+                    placeholder="project name..."
                   />
                 </FormControl>
                 <FormMessage />
@@ -65,7 +70,7 @@ const CreateProjectForm = () => {
 
           <FormField
             control={form.control}
-            name="descriptions"
+            name="description"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
@@ -73,7 +78,7 @@ const CreateProjectForm = () => {
                     {...field}
                     type="text"
                     className="border w-full border-gray-700 py-5 px-5"
-                    placeholder="project name..."
+                    placeholder="project description..."
                   />
                 </FormControl>
                 <FormMessage />
