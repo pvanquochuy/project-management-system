@@ -35,18 +35,16 @@ export const fetchProjects =
     }
   };
 
-export const searchProjects =
-  ({ keyword }) =>
-  async (dispatch) => {
-    dispatch({ type: SEARCH_PROJECTS_REQUEST });
-    try {
-      const { data } = await api.get("/api/projects/search?keyword=" + keyword);
-      console.log("search projects", data);
-      dispatch({ type: SEARCH_PROJECTS_SUCCESS, projects: data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const searchProjects = (keyword) => async (dispatch) => {
+  dispatch({ type: SEARCH_PROJECTS_REQUEST });
+  try {
+    const { data } = await api.get("/api/projects/search?keyword=" + keyword);
+    console.log("search projects", data);
+    dispatch({ type: SEARCH_PROJECTS_SUCCESS, projects: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const fetchProjectsById =
   ({ id }) =>

@@ -44,7 +44,8 @@ export const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        searchProjects: action.payload,
+        searchProjects: action.projects,
+
         error: null,
       };
     case CREATE_PROJECTS_SUCCESS:
