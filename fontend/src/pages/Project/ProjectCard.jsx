@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { deleteProject } from "@/redux/Project/Action";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,10 +9,15 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { DotFilledIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ProjectCard = ({ item }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(deleteProject({ projectId: item.id }));
+  };
 
   return (
     <Card className="p-5 w-full lg:max-w-3xl">
@@ -37,7 +43,9 @@ const ProjectCard = ({ item }) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem>Update</DropdownMenuItem>
-                  <DropdownMenuItem>Delete</DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleDelete}>
+                    Delete
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

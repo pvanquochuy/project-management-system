@@ -62,11 +62,13 @@ export const projectReducer = (state = initialState, action) => {
         error: null,
       };
     case DELETE_PROJECTS_SUCCESS:
+      console.log("delete project id:", action.projectId);
+
       return {
         ...state,
         loading: false,
-        projectDetails: state.projects.filter(
-          (project) => project.id === action.projectId
+        projects: state.projects.filter(
+          (project) => project.id !== action.projectId
         ),
         error: null,
       };

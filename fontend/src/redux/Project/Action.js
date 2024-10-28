@@ -2,6 +2,7 @@ import api from "@/config/app";
 import {
   ACCEPT_INVITATION_PROJECTS_REQUEST,
   ACCEPT_INVITATION_PROJECTS_SUCCESS,
+  CREATE_PROJECTS_FAILURE,
   CREATE_PROJECTS_REQUEST,
   CREATE_PROJECTS_SUCCESS,
   DELETE_PROJECTS_REQUEST,
@@ -67,8 +68,10 @@ export const createProject = (projectData) => async (dispatch) => {
     const { data } = await api.post("/api/projects", projectData);
     console.log("create projects", data);
     console.log("project data:", projectData);
-    dispatch({ type: CREATE_PROJECTS_SUCCESS, projects: data });
+    dispatch({ type: CREATE_PROJECTS_SUCCESS, project: data });
   } catch (error) {
+    dispatch({ type: CREATE_PROJECTS_FAILURE, error: error.message }); // Đảm bảo action này cũng có type
+
     console.log(error);
   }
 };
@@ -78,9 +81,9 @@ export const deleteProject =
   async (dispatch) => {
     dispatch({ type: DELETE_PROJECTS_REQUEST });
     try {
-      const { data } = await api.delete("/api/projects" + projectId);
+      const { data } = await api.delete("/api/projects/" + projectId);
       console.log("delete projects", data);
-      dispatch({ type: DELETE_PROJECTS_SUCCESS, projects: data });
+      dispatch({ type: DELETE_PROJECTS_SUCCESS, projectId });
     } catch (error) {
       console.log(error);
     }
