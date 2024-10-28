@@ -8,11 +8,11 @@ import {
 } from "@radix-ui/react-icons";
 import { Label } from "@radix-ui/react-label";
 import { RadioGroup } from "@radix-ui/react-radio-group";
+import { useState } from "react";
 import ProjectCard from "../Project/ProjectCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { searchProjects } from "@/redux/Project/Action";
+import { fetchProjects, searchProjects } from "@/redux/Project/Action";
 
 export const tags = [
   "all",
@@ -31,9 +31,21 @@ const ProjectList = () => {
   const [keyword, setKeyword] = useState("");
   const { project } = useSelector((store) => store);
   const dispatch = useDispatch();
-  const handleFilterChange = (section, value) => {
-    console.log("value", value, section);
+
+  const handleFilterCategory = (value) => {
+    if (value == "all") {
+      dispatch(fetchProjects({}));
+    } else dispatch(fetchProjects({ category: value }));
+
+    // console.log("value", value, section);
   };
+
+  const handleFilterTags = (value) => {
+    if (value == "all") {
+      dispatch(fetchProjects({}));
+    } else dispatch(fetchProjects({ tag: value }));
+  };
+
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
     dispatch(searchProjects(e.target.value));
@@ -61,9 +73,7 @@ const ProjectList = () => {
                     <RadioGroup
                       className="space-y-3 pt-5"
                       defaultValue="all"
-                      onValueChange={(value) =>
-                        handleFilterChange("category", value)
-                      }
+                      onValueChange={(value) => handleFilterCategory(value)}
                     >
                       <div className="flex items-center gap-2">
                         <RadioGroupItem value="all" id="r1" />
@@ -91,9 +101,7 @@ const ProjectList = () => {
                     <RadioGroup
                       className="space-y-3 pt-5"
                       defaultValue="all"
-                      onValueChange={(value) =>
-                        handleFilterChange("tag", value)
-                      }
+                      onValueChange={(value) => handleFilterTags(value)}
                     >
                       {tags.map((item) => (
                         <div key={item} className="flex items-center gap-2">
