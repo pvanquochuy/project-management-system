@@ -14,11 +14,22 @@ import InviteUserForm from "./InviteUserForm";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import IssueList from "./IssueList";
 import ChatBox from "./ChatBox";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProjectsById } from "@/redux/Project/Action";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const ProjectDetails = () => {
-  const handleProjectInvitaion = () => {
-    // 8:31
-  };
+  const dispatch = useDispatch();
+  const { project } = useSelector((store) => store);
+  const { id } = useParams();
+  const handleProjectInvitaion = () => {};
+
+  useEffect(() => {
+    dispatch(fetchProjectsById({ id }));
+  }, [id]);
+
+  console.log("project details:", project);
 
   return (
     <>
@@ -29,23 +40,23 @@ const ProjectDetails = () => {
               {" "}
               {/* Applied space-y-4 for consistent spacing */}
               <h1 className="text-lg font-semibold">
-                Create Ecommerce Website Using React
+                {project?.projectDetails?.name}
               </h1>
               <div className="space-y-5 text-sm">
                 <p className="w-full md:max-w-lg lg:max-w-xl">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  {project.ProjectDetails?.description}
                 </p>
               </div>
               <div className="flex">
                 <p className="w-36">Project Lead :</p>
-                <p>Zosh</p>
+                <p>{project.projectDetails?.owner.email}</p>
               </div>
               <div className="flex items-center">
                 <p className="w-36">Members:</p>
                 <div className="flex items-center gap-2">
-                  {[1, 1, 1, 1].map((item, index) => (
+                  {project.projectDetails?.team.map((item, index) => (
                     <Avatar key={index} className="cursor-pointer">
-                      <AvatarFallback>Z</AvatarFallback>
+                      <AvatarFallback>{item.fullName[0]}</AvatarFallback>
                     </Avatar>
                   ))}
                 </div>
@@ -73,11 +84,11 @@ const ProjectDetails = () => {
               </div>
               <div className="flex">
                 <p className="w-36">Category:</p>
-                <p>Fullstack</p>
+                <p>{project.projectDetails?.category}</p>
               </div>
               <div className="flex">
                 <p className="w-36">Project Lead:</p>
-                <Badge>Zosh</Badge>
+                <Badge>{project.projectDetails?.owner.email}</Badge>
               </div>
               <section>
                 <p className="py-5 border-b text-lg -tracking-wider">Tasks</p>

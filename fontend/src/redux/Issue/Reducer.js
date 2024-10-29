@@ -14,6 +14,7 @@ const issueReducer = (state = initialState, action) => {
     case actionTypes.DELETE_ISSUE_REQUEST:
     case actionTypes.FETCH_ISSUES_BY_ID_REQUEST:
     case actionTypes.ASSIGNED_ISSUE_TO_USER_REQUEST:
+    case actionTypes.UPDATE_ISSUES_STATUS_REQUEST:
       return {
         ...state,
         loading: true,
@@ -45,11 +46,20 @@ const issueReducer = (state = initialState, action) => {
           issue.id = action.issueid ? action.issue : issue;
         }),
       };
-    case actionTypes.DELETE_ISSUE_SUCCESSS:
+    case actionTypes.UPDATE_ISSUES_STATUS_SUCCESS:
       return {
         ...state,
         loading: false,
-        issues: state.is.filter((issue) => issue.id !== action.issueId),
+        issueDetails: {
+          ...state.issueDetails,
+          status: action.issues.status,
+        },
+      };
+    case actionTypes.DELETE_ISSUE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        issues: state.issues.filter((issue) => issue.id !== action.issueId),
       };
     case actionTypes.FETCH_ISSUES_BY_ID_FAILURE:
     case actionTypes.CREATE_ISSUE_FAILURE:

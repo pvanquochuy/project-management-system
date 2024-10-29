@@ -38,6 +38,7 @@ export const projectReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         projects: action.projects,
+        searchProjects: [],
         error: null,
       };
     case SEARCH_PROJECTS_SUCCESS:
@@ -59,11 +60,11 @@ export const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        projectDetails: action.payload,
+        projectDetails: action.project,
         error: null,
       };
     case DELETE_PROJECTS_SUCCESS:
-      console.log("delete project id:", action.projectId);
+      console.log("delete project id:", action.project);
 
       return {
         ...state,
@@ -73,7 +74,6 @@ export const projectReducer = (state = initialState, action) => {
         ),
         error: null,
       };
-
     default:
       return state;
   }

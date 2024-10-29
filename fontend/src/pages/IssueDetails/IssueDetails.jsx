@@ -12,25 +12,35 @@ import {
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchIssueById, updateIssuesStatus } from "@/redux/Issue/Action";
 
 const IssueDetails = () => {
   const { projectId, issueId } = useParams();
+  const dispatch = useDispatch();
+  const { issue } = useSelector((store) => store);
 
   const handleUpdateIssueStatus = (status) => {
+    dispatch(updateIssuesStatus({ status, id: issueId }));
     console.log(status);
   };
+
+  useEffect(() => {
+    dispatch(fetchIssueById(issueId));
+  }, [issueId]);
   return (
     <div className="px-20 py-8 text-gray-400">
       <div className="flex justify-between border p-10 rounded-lg">
         <ScrollArea>
           <div className="h-80vh w-[60%]">
             <h1 className="text-lg font-semibold text-gray-400">
-              Create navbar
+              {issue.issueDetails?.title}
             </h1>
             <div className="py-5">
               <h2 className="font-semibold text-gray-400">Description</h2>
               <p className="text-gray-400 text-sm mt-3">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                {issue.issueDetails?.description}
               </p>
             </div>
             <div className="mt-5">
@@ -93,7 +103,7 @@ const IssueDetails = () => {
 
                 <div className="flex gap-10 items-center">
                   <p className="w-[7rem]">Status</p>
-                  <Badge>in_progress</Badge>
+                  <Badge>{issue.issueDetails?.status}</Badge>
                 </div>
 
                 <div className="flex gap-10 items-center">
