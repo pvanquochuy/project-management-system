@@ -19,6 +19,12 @@ const commentReducer = (state = initialState, action) => {
         loading: false,
         comments: [...state.comments, action.comment],
       };
+    case actionTypes.FETCH_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        comments: action.comments,
+      };
 
     case actionTypes.DELETE_COMMENT_SUCCESS:
       return {

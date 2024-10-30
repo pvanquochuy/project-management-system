@@ -29,7 +29,7 @@ export const deleteComment = (commentId) => {
       console.log("delete success: ", response.data);
       dispatch({
         type: actionTypes.DELETE_COMMENT_SUCCESS,
-        chat: response.data,
+        commentId,
       });
     } catch (error) {
       console.log(error);

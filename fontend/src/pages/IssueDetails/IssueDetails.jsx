@@ -15,11 +15,12 @@ import { Badge } from "@/components/ui/badge";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchIssueById, updateIssuesStatus } from "@/redux/Issue/Action";
+import { fetchComments } from "@/redux/Comment/Action";
 
 const IssueDetails = () => {
   const { projectId, issueId } = useParams();
   const dispatch = useDispatch();
-  const { issue } = useSelector((store) => store);
+  const { issue, comment } = useSelector((store) => store);
 
   const handleUpdateIssueStatus = (status) => {
     dispatch(updateIssuesStatus({ status, id: issueId }));
@@ -28,6 +29,7 @@ const IssueDetails = () => {
 
   useEffect(() => {
     dispatch(fetchIssueById(issueId));
+    dispatch(fetchComments(issueId));
   }, [issueId]);
   return (
     <div className="px-20 py-8 text-gray-400">
@@ -57,8 +59,8 @@ const IssueDetails = () => {
                 <TabsContent value="comments">
                   <CreateCommentForm issueId={issueId} />
                   <div className="mt-8 space-y-6">
-                    {[1, 1, 1].map((item) => (
-                      <CommentCard key={item} />
+                    {comment.comments.map((item) => (
+                      <CommentCard item={item} key={item} />
                     ))}
                   </div>
                 </TabsContent>
@@ -88,12 +90,18 @@ const IssueDetails = () => {
               <div className="space-y-7">
                 <div className="flex gap-10 items-center">
                   <p className="w-[7rem]">Assignee</p>
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-8 w-8 text-xs">
-                      <AvatarFallback>Z</AvatarFallback>
-                    </Avatar>
-                    <p>code with huy</p>
-                  </div>
+                  {issue.issueDetails?.assignee?.fullName ? (
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-8 w-8 text-xs">
+                        <AvatarFallback>
+                          {issue.issueDetails?.assignee?.fullName[0]}
+                        </AvatarFallback>
+                      </Avatar>
+                      <p>{issue.issueDetails?.assignee?.fullName}</p>
+                    </div>
+                  ) : (
+                    <p>unassigned</p>
+                  )}
                 </div>
 
                 <div className="flex gap-10 items-center">

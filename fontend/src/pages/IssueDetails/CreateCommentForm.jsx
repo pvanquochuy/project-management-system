@@ -8,11 +8,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createComment } from "@/redux/Comment/Action";
 import { createIssue } from "@/redux/Issue/Action";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-const CreateCommentForm = ({ issuedId }) => {
+const CreateCommentForm = ({ issueId }) => {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -23,7 +24,7 @@ const CreateCommentForm = ({ issuedId }) => {
   });
 
   const onSubmit = (data) => {
-    // dispatch(createIssue(data));
+    dispatch(createComment({ content: data.content, issueId }));
     console.log("create comment data: ", data);
   };
 
